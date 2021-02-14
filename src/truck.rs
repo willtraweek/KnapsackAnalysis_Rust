@@ -31,13 +31,12 @@ impl Truck {
         self.capacity - self.weight
     }
 
-    pub fn add_package(&mut self, package: Package) -> bool {
+    pub fn add_package(&mut self, package: &Package) -> bool {
         //! Tries to add a package to the truck.  If there's not enough space, it returns an error, else
         //! it returns None
         if package.weight() < self.leftover_space() {
             if self.packages.contains_key(package.name()){
-                let mut num_packages = * self.packages.get_mut(package.name()).expect("Package is not in truck");
-                num_packages += 1
+                * self.packages.get_mut(package.name()).unwrap() += 1;
             } else {
                 self.packages.insert(package.name().clone(), 1);
             }
@@ -51,10 +50,10 @@ impl Truck {
         }
     }
 
-    pub fn remove_package(&mut self, package: Package) -> bool {
+    pub fn remove_package(&mut self, package: &Package) -> bool {
         if self.packages.contains_key(package.name()) {
-            let mut num_packages = *self.packages.get_mut(package.name()).expect("Package not in truck");
-            num_packages -= 1;
+            * self.packages.get_mut(package.name()).unwrap() -= 1;
+            let num_packages = * self.packages.get(package.name()).unwrap();
 
             self.weight -= package.weight();
             self.value -= package.price();
@@ -63,6 +62,7 @@ impl Truck {
             if num_packages == 0 {
                 self.packages.remove(package.name());
             }
+
             true
         } else {
             // THERE ARE NO PACKAGES OF THIS TYPE IN THE TRUCK, SO WE CAN'T REMOVE IT
