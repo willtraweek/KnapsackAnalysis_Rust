@@ -20,7 +20,7 @@ impl Warehouse {
             value: 0
         };
 
-        output.import_boxes(input_file_path);
+        output.import_packages(input_file_path);
 
         output
     }
