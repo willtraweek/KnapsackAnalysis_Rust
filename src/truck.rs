@@ -27,7 +27,9 @@ impl Truck {
         }
     }
 
-}
+    fn leftover_space(&self) -> usize{
+        self.capacity - self.weight
+    }
 
 impl Ord for Truck {
     fn cmp (&self, other: &Self) -> Ordering {
