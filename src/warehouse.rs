@@ -25,7 +25,7 @@ impl Warehouse {
         output
     }
 
-    fn import_boxes(&mut self, input_file_path: String) {
+    fn import_packages(&mut self, input_file_path: String) {
         let input_file = File::open(input_file_path).expect("Can't open the file for the warehouse");
 
         for line in BufReader::new(input_file).lines() {
@@ -70,5 +70,13 @@ impl Warehouse {
         // IF THERE ARE NO MORE PACKAGES OF THIS TYPE, REMOVE THAT LISTING FROM THE PACKAGES LIST
         if (* self.packages.get(package.name()).unwrap()) == 0 {
             self.packages.remove(package.name());
+        }
+    }
+
+    fn load_package(&mut self, package: Package, mut truck: Truck) {
+        let temp = truck.add_package(&package);
+
+        if temp {
+            self.remove_package(package)
         }
     }
