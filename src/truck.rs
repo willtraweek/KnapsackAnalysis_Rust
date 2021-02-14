@@ -51,6 +51,26 @@ impl Truck {
         }
     }
 
+    pub fn remove_package(&mut self, package: Package) -> bool {
+        if self.packages.contains_key(package.name()) {
+            let mut num_packages = *self.packages.get_mut(package.name()).expect("Package not in truck");
+            num_packages -= 1;
+
+            self.weight -= package.weight();
+            self.value -= package.price();
+
+            // IF THE REMOVED ITEM WAS THE FINAL ONE OF ITS TYPE, REMOVE IT
+            if num_packages == 0 {
+                self.packages.remove(package.name());
+            }
+            true
+        } else {
+            // THERE ARE NO PACKAGES OF THIS TYPE IN THE TRUCK, SO WE CAN'T REMOVE IT
+            false
+        }
+    }
+}
+
 impl Ord for Truck {
     fn cmp (&self, other: &Self) -> Ordering {
         if self.capacity < other.capacity {
