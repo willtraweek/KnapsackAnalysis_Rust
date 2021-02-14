@@ -17,11 +17,11 @@ impl Package {
         &self.name
     }
 
-    pub fn weight(&self) -> weight {
-        &self.weight
+    pub fn weight(&self) -> u16 {
+        self.weight
     }
 
-    pub fn price(&self) -> weight {
-        &self.price
+    pub fn price(&self) -> u16 {
+        self.price
     }
 }
