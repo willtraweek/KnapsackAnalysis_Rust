@@ -40,4 +40,9 @@ impl Warehouse {
 
         }
     }
+
+    pub fn add_truck(&mut self, truck: Truck) {
+        self.trucks.push(truck);
+        self.capacity += truck.capacity();
+    }
 }
