@@ -57,4 +57,18 @@ impl Warehouse {
 
         self.value += package.price();
     }
-}
+
+    fn remove_package(&mut self, package: Package) {
+        if ! self.packages.contains_key(package.name()){
+            panic!("Cannot remove a package that doesn't exist from the warehouse")
+        }
+
+        // REMOVE THIS PACKAGE'S VALUE AND DECREMENT THE COUNT BY 1
+        self.value -= package.price();
+        * self.packages.get_mut(package.name()).unwrap() -= 1;
+
+        // IF THERE ARE NO MORE PACKAGES OF THIS TYPE, REMOVE THAT LISTING FROM THE PACKAGES LIST
+        if (* self.packages.get(package.name()).unwrap()) == 0 {
+            self.packages.remove(package.name());
+        }
+    }
