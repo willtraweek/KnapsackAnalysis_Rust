@@ -31,21 +31,23 @@ impl Truck {
         self.capacity - self.weight
     }
 
-    pub fn add_package(&mut self, package: Package) -> Option<io::Error> {
+    pub fn add_package(&mut self, package: Package) -> bool {
         //! Tries to add a package to the truck.  If there's not enough space, it returns an error, else
         //! it returns None
         if package.weight() < self.leftover_space() {
             if self.packages.contains_key(package.name()){
-                self.packages.get_mut(package.name()) += 1
+                let mut num_packages = * self.packages.get_mut(package.name()).expect("Package is not in truck");
+                num_packages += 1
             } else {
-                self.packages.insert(package.name().clone(), 1)
+                self.packages.insert(package.name().clone(), 1);
             }
 
             self.weight += package.price();
             self.value += package.price();
-            None
+            true
         } else {
-            Err("Package too heavy to fit")
+            // THIS PACKAGE IS TOO HEAVY TO FIT, SO WE CAN'T ADD IT
+            false
         }
     }
 
