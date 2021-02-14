@@ -3,7 +3,7 @@ use std::io::{BufRead, BufReader};
 use std::vec::Vec;
 use std::collections::HashMap;
 use rand::{self, seq::SliceRandom};
-use crate::package;
+use crate::package::Package as Package;
 
 pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize, test_num: Option<u16>) {
     //! Creates a test set based off of the NAPCS list, randomizing prices and weights of objects
@@ -25,7 +25,7 @@ pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize,
 
     let item_names = read_input();
 
-    let mut generated_items: HashMap<String, package> = HashMap::new();
+    let mut generated_items: HashMap<String, Package> = HashMap::new();
 
     for _ in 0..num_packages {
         let item_name = item_names.choose(&mut rand::thread_rng());
