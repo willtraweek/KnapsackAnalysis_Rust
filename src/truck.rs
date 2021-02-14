@@ -1,6 +1,7 @@
 use crate::package::Package as Package;
 use std::collections::HashMap;
 use std::cmp::{Ordering, Eq, PartialOrd, PartialEq};
+use std::io;
 
 #[derive(Eq)]
 pub struct Truck {
@@ -29,6 +30,24 @@ impl Truck {
 
     fn leftover_space(&self) -> usize{
         self.capacity - self.weight
+    }
+
+    pub fn add_package(&mut self, package: Package) -> Option<io::Error> {
+        //! Tries to add a package to the truck.  If there's not enough space, it returns an error, else
+        //! it returns None
+        if package.weight() < self.leftover_space() {
+            if self.packages.contains_key(package.name()){
+                self.packages.get_mut(package.name()) += 1
+            } else {
+                self.packages.insert(package.name().clone(), 1)
+            }
+
+            self.weight += package.price();
+            self.value += package.price();
+            None
+        } else {
+            Err("Package too heavy to fit")
+        }
     }
 
 impl Ord for Truck {
