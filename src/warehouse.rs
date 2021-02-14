@@ -38,11 +38,20 @@ impl Warehouse {
             weight = line.2.parse::<usize>().unwrap();
             price = line.3.parse::<usize>().unwrap();
 
+            self.add_package(Package::new(name, weight, price));
         }
     }
 
     pub fn add_truck(&mut self, truck: Truck) {
         self.trucks.push(truck);
         self.capacity += truck.capacity();
+    fn add_package(&mut self, package: Package) {
+        if self.packages.contains_key(package.name()) {
+            * self.packages.get_mut(package.name()).unwrap() += 1;
+        } else {
+            self.packages.insert(package.name().clone(), 1);
+        }
+
+        self.value += package.price();
     }
 }
