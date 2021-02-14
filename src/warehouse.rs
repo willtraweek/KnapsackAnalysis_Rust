@@ -13,7 +13,7 @@ pub struct Warehouse {
 
 impl Warehouse {
     pub fn new(input_file_path: String) -> Warehouse{
-        let output = Warehouse {
+        let mut output = Warehouse {
             trucks: BinaryHeap::new(),
             packages: HashMap::new(),
             capacity: 0,
@@ -25,26 +25,29 @@ impl Warehouse {
         output
     }
 
-    fn import_boxes(&self, input_file_path: String) {
+    fn import_boxes(&mut self, input_file_path: String) {
         let input_file = File::open(input_file_path).expect("Can't open the file for the warehouse");
 
         for line in BufReader::new(input_file).lines() {
-            let line = line.split(",");
-            name = line.1;
+            let line = line.unwrap();
+            let line = line.split(",").collect::<Vec<&str>>();
+            let name = (* line.get(0).unwrap()).to_string();
 
             // THIS PREVENTS THE FIRST LINE FROM BEING READ IN
             if name == "name" { continue };
 
-            weight = line.2.parse::<usize>().unwrap();
-            price = line.3.parse::<usize>().unwrap();
+            let weight = (* line.get(1).unwrap()).parse::<usize>().unwrap();
+            let price = (* line.get(2).unwrap()).parse::<usize>().unwrap();
 
             self.add_package(Package::new(name, weight, price));
         }
     }
 
     pub fn add_truck(&mut self, truck: Truck) {
-        self.trucks.push(truck);
         self.capacity += truck.capacity();
+        self.trucks.push(truck);
+    }
+
     fn add_package(&mut self, package: Package) {
         if self.packages.contains_key(package.name()) {
             * self.packages.get_mut(package.name()).unwrap() += 1;
