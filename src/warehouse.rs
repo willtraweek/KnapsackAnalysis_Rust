@@ -10,3 +10,17 @@ pub struct Warehouse {
     capacity: usize,
     value: usize
 }
+
+impl Warehouse {
+    pub fn new(input_file_path: String) -> Warehouse{
+        let output = Warehouse {
+            trucks: BinaryHeap::new(),
+            packages: HashMap::new(),
+            capacity: 0,
+            value: 0
+        };
+
+        output
+    }
+
+}
