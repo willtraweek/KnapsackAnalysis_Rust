@@ -52,3 +52,24 @@ fn read_input() -> Vec<String> {
 
     return item_names
 }
+
+fn setup_output(test_num: Option<u16>) -> File {
+    let output_path = match test_num {
+        Some(t) => format!("./available_packages_{}.csv", t),
+        None => format!("./available_packages.csv")
+    };
+
+    let mut output_file = match File::create(&output_path) {
+        Ok(t) => t,
+        Err(_) => {
+            // THIS IS GENERALLY BECAUSE THE FILE ALREADY EXISTS -- HANDLE IT BY DELETING SAID FILE
+            // THEN CREATING IT
+            std::fs::remove_file(&output_path);
+            File::create(&output_path).expect("Cannot create necessary output file")
+        }
+    };
+
+    output_file.write_all("name,weight,price\n".as_bytes());
+
+    output_file
+}
