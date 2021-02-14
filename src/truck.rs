@@ -9,12 +9,12 @@ pub struct Truck {
     /// Attributes:
     /// * capacity: the maximum weight a truck can hold
     /// * weight: the current weight
-    /// * value: the value of all of the boxes in the truck
-    /// * boxes: A map of all of the boxes that are in the truck
+    /// * value: the value of all of the packages in the truck
+    /// * packages: A map of all of the packages that are in the truck
     capacity: usize,
     weight: usize,
     value: usize,
-    boxes: HashMap<String, u16>
+    packages: HashMap<String, u16>
 }
 
 impl Truck {
@@ -23,7 +23,7 @@ impl Truck {
             capacity,
             weight,
             value,
-            boxes: HashMap::new()
+            packages: HashMap::new()
         }
     }
 
