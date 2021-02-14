@@ -20,7 +20,24 @@ impl Warehouse {
             value: 0
         };
 
+        output.import_boxes(input_file_path);
+
         output
     }
 
+    fn import_boxes(&self, input_file_path: String) {
+        let input_file = File::open(input_file_path).expect("Can't open the file for the warehouse");
+
+        for line in BufReader::new(input_file).lines() {
+            let line = line.split(",");
+            name = line.1;
+
+            // THIS PREVENTS THE FIRST LINE FROM BEING READ IN
+            if name == "name" { continue };
+
+            weight = line.2.parse::<usize>().unwrap();
+            price = line.3.parse::<usize>().unwrap();
+
+        }
+    }
 }
