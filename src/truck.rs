@@ -17,6 +17,17 @@ pub struct Truck {
     boxes: HashMap<String, u16>
 }
 
+impl Truck {
+    pub fn new(capacity: u32, weight: u32, value: u32) -> Truck {
+        Truck {
+            capacity,
+            weight,
+            value,
+            boxes: HashMap::new()
+        }
+    }
+
+}
 
 impl Ord for Truck {
     fn cmp (&self, other: &Self) -> Ordering {
