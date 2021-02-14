@@ -1,8 +1,8 @@
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::{BufRead, BufReader, Write};
 use std::vec::Vec;
 use std::collections::HashMap;
-use rand::{self, seq::SliceRandom};
+use rand::{self, seq::SliceRandom, Rng};
 use crate::package::Package as Package;
 
 pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize, test_num: Option<u16>) {
@@ -45,7 +45,8 @@ pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize,
 
         // WRITE BOX TO OUTPUT
 
-        output_file.write_all(format!("{},{},{}\n",package.name(), package.weight(), package.price()).as_bytes());
+        output_file.write_all(format!("{},{},{}\n",package.name(), package.weight(), package.price()).as_bytes())
+            .expect("Cannot write to file");
     }
 }
 
@@ -75,12 +76,13 @@ fn setup_output(test_num: Option<u16>) -> File {
         Err(_) => {
             // THIS IS GENERALLY BECAUSE THE FILE ALREADY EXISTS -- HANDLE IT BY DELETING SAID FILE
             // THEN CREATING IT
-            std::fs::remove_file(&output_path);
+            std::fs::remove_file(&output_path).expect(&format!("Cannot remove the file at {}", output_path));
             File::create(&output_path).expect("Cannot create necessary output file")
         }
     };
 
-    output_file.write_all("name,weight,price\n".as_bytes());
+    output_file.write_all("name,weight,price\n".as_bytes())
+        .expect("Cannot write to file");
 
     output_file
 }
