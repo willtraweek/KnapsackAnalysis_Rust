@@ -1,7 +1,6 @@
 use crate::package::Package as Package;
 use std::collections::HashMap;
 use std::cmp::{Ordering, Eq, PartialOrd, PartialEq};
-use std::io;
 
 #[derive(Eq)]
 pub struct Truck {
@@ -19,11 +18,11 @@ pub struct Truck {
 }
 
 impl Truck {
-    pub fn new(capacity: usize, weight: usize, value: usize) -> Truck {
+    pub fn new(capacity: usize) -> Truck {
         Truck {
             capacity,
-            weight,
-            value,
+            weight: 0,
+            value: 0,
             packages: HashMap::new()
         }
     }
