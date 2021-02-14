@@ -1,5 +1,5 @@
 [package]
-name = "KnapsackAnalysis_Rust"
+name = "knapsack_analysis_rust"
 version = "0.1.0"
 authors = ["Will Traweek <will.traweek@gmail.com>"]
 edition = "2018"
