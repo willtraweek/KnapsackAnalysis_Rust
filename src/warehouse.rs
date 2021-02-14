@@ -92,3 +92,17 @@ impl Warehouse {
     pub fn num_packages(&self) -> usize {
         self.packages.len()
     }
+
+    pub fn to_vector(&self) -> Vec<&Package> {
+        // RETURNS THE PACKAGES IN VECTOR FORM FOR THE DYNAMIC PROGRAMMING SOLUTION
+        let mut output: Vec<&Package> = Vec::new();
+
+        for (package, count) in self.packages.iter() {
+            for i in 0..(*count) {
+                output.push(package);
+            }
+        }
+
+        output
+    }
+}
