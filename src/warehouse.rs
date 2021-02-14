@@ -80,3 +80,15 @@ impl Warehouse {
             self.remove_package(package)
         }
     }
+
+    fn unload_package(&mut self, package: Package, mut truck: Truck) {
+        let temp = truck.remove_package(&package);
+
+        if temp {
+            self.add_package(package);
+        }
+    }
+
+    pub fn num_packages(&self) -> usize {
+        self.packages.len()
+    }
