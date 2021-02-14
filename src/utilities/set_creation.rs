@@ -32,8 +32,8 @@ pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize,
             Some(t) => t.clone(),
             // IF NOT, THEN CREATE A PACKAGE
             None => {
-                let weight = rand::thread_rng().gen_range(0..max_weight) as u16;
-                let price = rand::thread_rng().gen_range(0..max_price) as u16;
+                let weight = rand::thread_rng().gen_range(0..max_weight);
+                let price = rand::thread_rng().gen_range(0..max_price);
 
                 let temp_package = Package::new(name.clone(), weight, price);
 

@@ -11,14 +11,14 @@ pub struct Truck {
     /// * weight: the current weight
     /// * value: the value of all of the boxes in the truck
     /// * boxes: A map of all of the boxes that are in the truck
-    capacity: u32,
-    weight: u32,
-    value: u32,
+    capacity: usize,
+    weight: usize,
+    value: usize,
     boxes: HashMap<String, u16>
 }
 
 impl Truck {
-    pub fn new(capacity: u32, weight: u32, value: u32) -> Truck {
+    pub fn new(capacity: usize, weight: usize, value: usize) -> Truck {
         Truck {
             capacity,
             weight,

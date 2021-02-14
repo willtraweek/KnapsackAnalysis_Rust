@@ -1,12 +1,12 @@
 #[derive(Clone)]
 pub struct Package {
     name: String,
-    weight: u16,
-    price: u16
+    weight: usize,
+    price: usize
 }
 
 impl Package {
-    pub fn new(name: String, weight: u16, price: u16) -> Package {
+    pub fn new(name: String, weight: usize, price: usize) -> Package {
         Package {
             name,
             weight,
@@ -18,11 +18,11 @@ impl Package {
         &self.name
     }
 
-    pub fn weight(&self) -> u16 {
+    pub fn weight(&self) -> usize {
         self.weight
     }
 
-    pub fn price(&self) -> u16 {
+    pub fn price(&self) -> usize {
         self.price
     }
 }
