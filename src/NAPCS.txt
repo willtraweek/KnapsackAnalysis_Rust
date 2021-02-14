@@ -1,0 +1,100 @@
+Beef
+Veal
+Poultry
+Fluid Milk
+Yogurt
+Pork
+Crackers
+Cookies
+Sugar products
+Table Salt
+Pepper
+Spices
+Margarine
+Butter
+Lard
+Chocolate Products
+Bread
+Cake
+Pie
+Pastries
+Tortillas
+Asparagus
+Cauliflower
+Broccoli
+Lettuce
+Chicory
+Spinach
+Artichokes
+Melons
+Fruit-bearing Vegetables
+Chiles
+Peppers
+Cucumbers
+Gherkins
+Eggplants
+Tomatoes
+Pumpkins
+Squash
+Gourds
+Green Leguminous Vegetables
+Carrots
+Turnips
+Green Garlic
+Onions
+Mushrooms
+Truffles
+Avocados
+Grapes
+Citrus Fruits
+Berries
+Pome Fruits
+Nuts in shell
+Coconuts in shell
+Potatoes
+Frozen Fruits
+Frozen Vegetables
+Soup Mixes
+Mayonnaise
+Breakfast Cereal
+Salads
+Sandwiches
+Tofu
+Ice
+Soft Drinks
+Cigarettes
+Clothing
+Footwear
+Fur
+Handbags
+Jewelry
+Watches
+Candles
+Bed Linens
+Mattresses
+Batteries
+Paintings
+Kitchenware
+Newspapers
+Books
+Textbooks
+Children's Books
+General Reference Books
+DVDs
+CDs
+Toys
+Games
+Hobby Kits
+Video Games
+Baby Carriages
+Bicycles
+Dolls
+Action Figures
+Stuffed Animals
+Motorcycles
+Mopeds
+Perfume
+Cologne
+Toothpaste
+Soap
+Computers
