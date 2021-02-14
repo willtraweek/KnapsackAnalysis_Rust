@@ -1,3 +1,9 @@
+mod utilities;
+
 fn main() {
-    println!("Hello, world!");
+    utilities::set_creation::create_test_set(10, 100, 500, Some(10))
 }
+
+/*
+test
+ */
