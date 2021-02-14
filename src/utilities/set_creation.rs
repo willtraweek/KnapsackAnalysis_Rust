@@ -1,10 +1,11 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::vec::Vec;
-use std::collections::{hash_set, HashSet};
+use std::collections::HashMap;
 use rand::{self, seq::SliceRandom};
+use crate::package;
 
-pub fn create_test_set(num_boxes: usize, max_weight: usize, max_price: usize, test_num: Option<u16>) {
+pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize, test_num: Option<u16>) {
     //! Creates a test set based off of the NAPCS list, randomizing prices and weights of objects
     //!
     //! If multiple boxes with the same good are generated, weight and price will be the same as the one
@@ -12,24 +13,25 @@ pub fn create_test_set(num_boxes: usize, max_weight: usize, max_price: usize, te
     //!
     //! Attributes:
     //!
-    //! * num_boxes: the number of boxes to generate
+    //! * num_packages: the number of packages to generate
     //! * max_weight: the upper limit of the randomly generated weight [0,max_weight)
     //! * max_price: the upper limit of the randomly generated price [0, max_price)
     //! * test_num: a number you can append to the test output.  Useful if you want to create multiple tests at once
 
     let output_file = match test_num {
-        Some(t) => format!("./available_boxes_{}.csv", t),
-        None => format!("./available_boxes.csv")
+        Some(t) => format!("./available_packages_{}.csv", t),
+        None => format!("./available_packages.csv")
     };
 
     let item_names = read_input();
 
-    let mut generated_items: HashSet<String> = HashSet::new();
+    let mut generated_items: HashMap<String, package> = HashMap::new();
 
-    for i in 0..num_boxes {
+    for i in 0..num_packages {
         let item_name = item_names.choose(&mut rand::thread_rng());
 
         // PUT THE ITEMS INTO BOXES
+        let temp: package =
     }
 }
 
