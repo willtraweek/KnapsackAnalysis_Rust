@@ -6,7 +6,7 @@ use std::io::{BufRead, BufReader, Write};
 
 pub struct Warehouse {
     trucks: BinaryHeap<Truck>,
-    packages: HashMap<String, u16>,
+    packages: HashMap<Package, u16>,
     capacity: usize,
     value: usize
 }
@@ -39,7 +39,7 @@ impl Warehouse {
             let weight = (* line.get(1).unwrap()).parse::<usize>().unwrap();
             let price = (* line.get(2).unwrap()).parse::<usize>().unwrap();
 
-            self.add_package(Package::new(name, weight, price));
+            self.add_package(&Package::new(name, weight, price));
         }
     }
 
@@ -48,32 +48,32 @@ impl Warehouse {
         self.trucks.push(truck);
     }
 
-    fn add_package(&mut self, package: Package) {
-        if self.packages.contains_key(package.name()) {
-            * self.packages.get_mut(package.name()).unwrap() += 1;
+    fn add_package(&mut self, package: &Package) {
+        if self.packages.contains_key(package) {
+            * self.packages.get_mut(package).unwrap() += 1;
         } else {
-            self.packages.insert(package.name().clone(), 1);
+            self.packages.insert(package.clone(), 1);
         }
 
         self.value += package.price();
     }
 
-    fn remove_package(&mut self, package: Package) {
-        if ! self.packages.contains_key(package.name()){
+    fn remove_package(&mut self, package: &Package) {
+        if ! self.packages.contains_key(package){
             panic!("Cannot remove a package that doesn't exist from the warehouse")
         }
 
         // REMOVE THIS PACKAGE'S VALUE AND DECREMENT THE COUNT BY 1
         self.value -= package.price();
-        * self.packages.get_mut(package.name()).unwrap() -= 1;
+        * self.packages.get_mut(package).unwrap() -= 1;
 
         // IF THERE ARE NO MORE PACKAGES OF THIS TYPE, REMOVE THAT LISTING FROM THE PACKAGES LIST
-        if (* self.packages.get(package.name()).unwrap()) == 0 {
-            self.packages.remove(package.name());
+        if (* self.packages.get(package).unwrap()) == 0 {
+            self.packages.remove(package);
         }
     }
 
-    fn load_package(&mut self, package: Package, mut truck: Truck) {
+    fn load_package(&mut self, package: &Package, mut truck: Truck) {
         let temp = truck.add_package(&package);
 
         if temp {
@@ -81,7 +81,7 @@ impl Warehouse {
         }
     }
 
-    fn unload_package(&mut self, package: Package, mut truck: Truck) {
+    fn unload_package(&mut self, package: &Package, mut truck: Truck) {
         let temp = truck.remove_package(&package);
 
         if temp {

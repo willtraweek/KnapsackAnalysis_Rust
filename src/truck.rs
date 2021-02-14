@@ -14,7 +14,7 @@ pub struct Truck {
     capacity: usize,
     weight: usize,
     value: usize,
-    packages: HashMap<String, u16>
+    packages: HashMap<Package, u16>
 }
 
 impl Truck {
@@ -39,10 +39,10 @@ impl Truck {
         //! Tries to add a package to the truck.  If there's not enough space, it returns an error, else
         //! it returns None
         if package.weight() < self.leftover_space() {
-            if self.packages.contains_key(package.name()){
-                * self.packages.get_mut(package.name()).unwrap() += 1;
+            if self.packages.contains_key(package){
+                * self.packages.get_mut(package).unwrap() += 1;
             } else {
-                self.packages.insert(package.name().clone(), 1);
+                self.packages.insert(package.clone(), 1);
             }
 
             self.weight += package.price();
@@ -55,16 +55,16 @@ impl Truck {
     }
 
     pub fn remove_package(&mut self, package: &Package) -> bool {
-        if self.packages.contains_key(package.name()) {
-            * self.packages.get_mut(package.name()).unwrap() -= 1;
-            let num_packages = * self.packages.get(package.name()).unwrap();
+        if self.packages.contains_key(package) {
+            * self.packages.get_mut(package).unwrap() -= 1;
+            let num_packages = * self.packages.get(package).unwrap();
 
             self.weight -= package.weight();
             self.value -= package.price();
 
             // IF THE REMOVED ITEM WAS THE FINAL ONE OF ITS TYPE, REMOVE IT
             if num_packages == 0 {
-                self.packages.remove(package.name());
+                self.packages.remove(package);
             }
 
             true
