@@ -18,10 +18,7 @@ pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize,
     //! * max_price: the upper limit of the randomly generated price [0, max_price)
     //! * test_num: a number you can append to the test output.  Useful if you want to create multiple tests at once
 
-    let output_file = match test_num {
-        Some(t) => format!("./available_packages_{}.csv", t),
-        None => format!("./available_packages.csv")
-    };
+    let mut output_file = setup_output(test_num);
 
     let item_names = read_input();
 
@@ -30,11 +27,25 @@ pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize,
     for _ in 0..num_packages {
         let name = item_names.choose(&mut rand::thread_rng()).unwrap().clone();
 
-        // PUT THE ITEMS INTO BOXES
-        let weight = rand::thread_rng().gen_range(0..max_weight) as u16;
-        let price = rand::thread_rng().gen_range(0..max_price) as u16;
+        let package = match generated_items.get(&name) {
+            // IF THAT GOOD HAS ALREADY BEEN PACKAGED, GET THAT PACKAGE AND ITS VALUES
+            Some(t) => t.clone(),
+            // IF NOT, THEN CREATE A PACKAGE
+            None => {
+                let weight = rand::thread_rng().gen_range(0..max_weight) as u16;
+                let price = rand::thread_rng().gen_range(0..max_price) as u16;
 
-        let temp: Package = Package::new(name, weight, price);
+                let temp_package = Package::new(name.clone(), weight, price);
+
+                generated_items.insert(name, temp_package.clone());
+
+                temp_package
+            }
+        };
+
+        // WRITE BOX TO OUTPUT
+
+        output_file.write_all(format!("{},{},{}\n",package.name(), package.weight(), package.price()).as_bytes());
     }
 }
 
