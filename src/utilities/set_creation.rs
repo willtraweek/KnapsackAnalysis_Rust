@@ -27,7 +27,7 @@ pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize,
 
     let mut generated_items: HashMap<String, package> = HashMap::new();
 
-    for i in 0..num_packages {
+    for _ in 0..num_packages {
         let item_name = item_names.choose(&mut rand::thread_rng());
 
         // PUT THE ITEMS INTO BOXES
@@ -43,7 +43,7 @@ fn read_input() -> Vec<String> {
 
     let mut item_names = vec![];
 
-    for (i, line) in input_file.lines().enumerate() {
+    for (_, line) in input_file.lines().enumerate() {
         item_names.push(line.unwrap())
     }
 
