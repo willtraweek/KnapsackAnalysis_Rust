@@ -9,11 +9,13 @@ pub fn create_test_set(num_boxes: usize, max_weight: usize, max_price: usize, te
     //!
     //! If multiple boxes with the same good are generated, weight and price will be the same as the one
     //! that was generated earlier.
+    //!
     //! Attributes:
-    //!     num_boxes: the number of boxes to generate
-    //!     max_weight: the upper limit of the randomly generated weight [0,max_weight)
-    //!     max_price: the upper limit of the randomly generated price [0, max_price)
-    //!     test_num: a number you can append to the test output.  Useful if you want to create multiple tests at once
+    //!
+    //! * num_boxes: the number of boxes to generate
+    //! * max_weight: the upper limit of the randomly generated weight [0,max_weight)
+    //! * max_price: the upper limit of the randomly generated price [0, max_price)
+    //! * test_num: a number you can append to the test output.  Useful if you want to create multiple tests at once
 
     let output_file = match test_num {
         Some(t) => format!("./available_boxes_{}.csv", t),
@@ -32,7 +34,7 @@ pub fn create_test_set(num_boxes: usize, max_weight: usize, max_price: usize, te
 }
 
 fn read_input() -> Vec<String> {
-    /// Reads in all of the possible item names from the NAPCS list and outputs them as a vector
+    //! Reads in all of the possible item names from the NAPCS list and outputs them as a vector
 
     let input_file = File::open("F:\\git\\KnapsackAnalysis_Rust\\src\\NAPCS.txt").unwrap();
     let input_file = BufReader::new(input_file);
