@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub struct Package {
     name: String,
     weight: u16,
