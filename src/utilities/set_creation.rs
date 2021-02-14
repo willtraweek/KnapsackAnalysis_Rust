@@ -28,10 +28,13 @@ pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize,
     let mut generated_items: HashMap<String, Package> = HashMap::new();
 
     for _ in 0..num_packages {
-        let item_name = item_names.choose(&mut rand::thread_rng());
+        let name = item_names.choose(&mut rand::thread_rng()).unwrap().clone();
 
         // PUT THE ITEMS INTO BOXES
-        let temp: package =
+        let weight = rand::thread_rng().gen_range(0..max_weight) as u16;
+        let price = rand::thread_rng().gen_range(0..max_price) as u16;
+
+        let temp: Package = Package::new(name, weight, price);
     }
 }
 
