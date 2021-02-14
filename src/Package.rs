@@ -1,3 +1,7 @@
+use std::cmp::{Eq, PartialEq};
+use std::hash::{Hash, Hasher};
+
+#[derive(Eq)]
 #[derive(Clone)]
 pub struct Package {
     name: String,
@@ -24,5 +28,17 @@ impl Package {
 
     pub fn price(&self) -> usize {
         self.price
+    }
+}
+
+impl PartialEq for Package {
+    fn eq(&self, other: &Self) -> bool {
+        return self.name == other.name
+    }
+}
+
+impl Hash for Package {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.name.hash(state);
     }
 }
