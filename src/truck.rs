@@ -1,4 +1,4 @@
-use crate::package::Package as Package;
+use crate::package::Package;
 use std::collections::HashMap;
 use std::cmp::{Ordering, Eq, PartialOrd, PartialEq};
 
@@ -25,6 +25,10 @@ impl Truck {
             value: 0,
             packages: HashMap::new()
         }
+    }
+
+    pub fn capacity(&self) -> usize {
+        self.capacity
     }
 
     fn leftover_space(&self) -> usize{
