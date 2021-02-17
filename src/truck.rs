@@ -38,7 +38,7 @@ impl Truck {
     pub fn add_package(&mut self, package: &Package) -> bool {
         //! Tries to add a package to the truck.  If there's not enough space, it returns an error, else
         //! it returns None
-        if package.weight() < self.leftover_space() {
+        if package.weight() <= self.leftover_space() {
             if self.packages.contains_key(package){
                 * self.packages.get_mut(package).unwrap() += 1;
             } else {
