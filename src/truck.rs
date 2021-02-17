@@ -31,6 +31,8 @@ impl Truck {
         self.capacity
     }
 
+    pub fn value(&self) -> usize { self.value }
+
     pub fn leftover_space(&self) -> usize{
         self.capacity - self.weight
     }
