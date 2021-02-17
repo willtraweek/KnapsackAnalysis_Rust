@@ -67,7 +67,7 @@ fn read_input() -> Vec<String> {
 
 fn setup_output(test_num: Option<u16>) -> File {
     let output_path = match test_num {
-        Some(t) => format!("./available_packages_{}.csv", t),
+        Some(t) => format!("./available_packages/{}.csv", t),
         None => format!("./available_packages.csv")
     };
 
