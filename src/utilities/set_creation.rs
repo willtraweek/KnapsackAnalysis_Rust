@@ -53,7 +53,7 @@ pub fn create_test_set(num_packages: usize, max_weight: usize, max_price: usize,
 fn read_input() -> Vec<String> {
     //! Reads in all of the possible item names from the NAPCS list and outputs them as a vector
 
-    let input_file = File::open("F:\\git\\KnapsackAnalysis_Rust\\src\\NAPCS.txt").unwrap();
+    let input_file = File::open("./NAPCS.txt").unwrap();
     let input_file = BufReader::new(input_file);
 
     let mut item_names = vec![];
