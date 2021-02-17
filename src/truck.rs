@@ -45,7 +45,7 @@ impl Truck {
                 self.packages.insert(package.clone(), 1);
             }
 
-            self.weight += package.price();
+            self.weight += package.weight();
             self.value += package.price();
             true
         } else {
