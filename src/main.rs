@@ -35,7 +35,7 @@ fn setup_algorithm(file_num: u16) {
         if i == 0 {
             let mut truck = Truck::new(((file_num + 1) * 10) as usize);
             //warehouse.add_truck(truck.clone());
-            knapsack::greedy_solution(&mut warehouse, &mut truck);
+            knapsack::dynamic_programming_solution(&mut warehouse, &mut truck);
         }
     }
 
