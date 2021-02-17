@@ -2,7 +2,7 @@ use std::collections::{BinaryHeap, HashMap};
 use crate::truck::Truck;
 use crate::package::Package;
 use std::fs::File;
-use std::io::{BufRead, BufReader, Write};
+use std::io::{BufRead, BufReader};
 
 pub struct Warehouse {
     trucks: BinaryHeap<Truck>,
@@ -73,7 +73,7 @@ impl Warehouse {
         }
     }
 
-    fn load_package(&mut self, package: &Package, mut truck: Truck) {
+    fn load_package(&mut self, package: &Package, truck: &mut Truck) {
         let temp = truck.add_package(&package);
 
         if temp {
@@ -81,7 +81,7 @@ impl Warehouse {
         }
     }
 
-    fn unload_package(&mut self, package: &Package, mut truck: Truck) {
+    fn unload_package(&mut self, package: &Package, truck: &mut Truck) {
         let temp = truck.remove_package(&package);
 
         if temp {
@@ -98,7 +98,7 @@ impl Warehouse {
         let mut output: Vec<&Package> = Vec::new();
 
         for (package, count) in self.packages.iter() {
-            for i in 0..(*count) {
+            for _ in 0..(*count) {
                 output.push(package);
             }
         }
@@ -108,5 +108,24 @@ impl Warehouse {
 
     pub fn has_packages(&self) -> bool {
         return ! self.packages.is_empty();
+    }
+
+    pub fn load_most_expensive_box(&mut self, truck: &mut Truck) -> bool {
+        // RETURNS TRUE IN THE EVENT IT SUCCESSFULLY LOADS A BOX
+        let max_weight = truck.leftover_space();
+
+        let mut most_expensive_package = Package::new("emtpy".to_string(), 0, 0);
+
+        for (key, _) in self.packages.iter() {
+            if (most_expensive_package.price() < key.price()) && (key.weight() <= max_weight) {
+                most_expensive_package = key.clone();
+            }
+        }
+
+        if most_expensive_package.price() > 0 {
+            self.load_package(&most_expensive_package, truck);
+            return true
+        }
+        false
     }
 }
