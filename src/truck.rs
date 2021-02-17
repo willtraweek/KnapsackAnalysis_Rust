@@ -73,6 +73,18 @@ impl Truck {
             false
         }
     }
+
+    pub fn clone(& self) -> Truck {
+        let mut output = Truck {
+            capacity: self.capacity,
+            weight: self.weight,
+            value: self.value,
+            packages: HashMap::new()
+        };
+
+        output.packages = self.packages.clone();
+        output
+    }
 }
 
 impl Ord for Truck {
