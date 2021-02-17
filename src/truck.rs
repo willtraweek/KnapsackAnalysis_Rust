@@ -14,7 +14,7 @@ pub struct Truck {
     capacity: usize,
     weight: usize,
     value: usize,
-    packages: HashMap<Package, u16>
+    pub packages: HashMap<Package, u16>
 }
 
 impl Truck {

@@ -75,7 +75,7 @@ impl Warehouse {
         }
     }
 
-    fn load_package(&mut self, package: &Package, truck: &mut Truck) {
+    pub fn load_package(&mut self, package: &Package, truck: &mut Truck) {
         let temp = truck.add_package(&package);
 
         if temp {
