@@ -25,6 +25,8 @@ impl Warehouse {
         output
     }
 
+    pub fn value(& self) -> usize { return self.value }
+
     fn import_packages(&mut self, input_file_path: String) {
         let input_file = File::open(input_file_path).expect("Can't open the file for the warehouse");
 
