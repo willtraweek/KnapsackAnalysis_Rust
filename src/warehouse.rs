@@ -105,4 +105,8 @@ impl Warehouse {
 
         output
     }
+
+    pub fn has_packages(&self) -> bool {
+        return ! self.packages.is_empty();
+    }
 }
